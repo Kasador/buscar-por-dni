@@ -1,0 +1,112 @@
+// fonts 
+.leckerli-one-regular {
+  font-family: "Leckerli One", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.ubuntu-light {
+  font-family: "Ubuntu", serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.ubuntu-regular {
+  font-family: "Ubuntu", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.ubuntu-medium {
+  font-family: "Ubuntu", serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.ubuntu-bold {
+  font-family: "Ubuntu", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.ubuntu-light-italic {
+  font-family: "Ubuntu", serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.ubuntu-regular-italic {
+  font-family: "Ubuntu", serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.ubuntu-medium-italic {
+  font-family: "Ubuntu", serif;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.ubuntu-bold-italic {
+  font-family: "Ubuntu", serif;
+  font-weight: 700;
+  font-style: italic;
+}
+// main styles 
+h1 {
+  color: yellowgreen;
+  padding: 10px;
+  font-size: 2rem;
+  font-family: "Leckerli One";
+}
+body {
+  background-color: #282c34;
+  color: white;
+  font-family: "Ubuntu", serif;
+}
+.MainApp {
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.Search {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+
+  input {
+    padding: 5px;
+    margin-right: 10px;
+    font-size: 1.4rem;
+    border-radius: 10px;
+    border-style: solid;
+
+    &:focus {
+      outline: none;
+      
+    }
+  }
+  svg {
+    font-size: 1.4rem;
+    padding: 10px;
+    color: white;
+    border-radius: 20%;
+  }
+}
+.bueno {
+  border-color: yellowgreen;
+  border-width: 5px;
+}
+.malo {
+  border-color: gray;
+  border-width: 5px;
+}
+.allow {
+  background-color: yellowgreen;
+  cursor: pointer;
+}
+.disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}
