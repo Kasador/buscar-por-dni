@@ -50,3 +50,17 @@ Este repositorio contiene el código fuente para desarrollar mi aplicación web 
   npm create vite@latest
 
 # 🛠️ 🐛 Progreso/Bugs
+
+### ✅ **Feat: Asumido func para manejar los errores >> UI/UX completado.**
+
+# ╰┈➤ **_Ejemplos abajo:_**
+
+<img width="450" alt="Image" src="https://github.com/user-attachments/assets/29945c70-aae0-4475-8c21-459b6d3b2ca1" />
+<img width="450" alt="Image" src="https://github.com/user-attachments/assets/41802388-9696-4366-af1d-b91b47a4f95c" />
+<img width="450" alt="Image" src="https://github.com/user-attachments/assets/32886e6e-4bb9-49a2-af92-e86a0b07df02" />
+<img width="450" alt="Image" src="https://github.com/user-attachments/assets/c10ce5ed-b4b5-4a30-bb10-9de7b361df6e" />
+<img width="450" alt="Image" src="https://github.com/user-attachments/assets/0e185aa3-eb40-46ca-bb16-feb6395adaa9" />
+
+### ✅ **Feat: Creado archivo de env para esconder clave de API.**
+
+# ╰┈➤ <img width="116" alt="Image" src="https://github.com/user-attachments/assets/9921f4f6-1aa0-484b-b5b8-e362c5d75035" />

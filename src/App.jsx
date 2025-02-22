@@ -1,90 +1,129 @@
 import { useState } from 'react'
 import './App.scss'
 import { FaSearch } from "react-icons/fa";
+import { BiSolidError } from "react-icons/bi";
 import axios from 'axios';
+import buscar from './assets/img/buscar_v1.gif';
 
 function App() {
   const [dni, setDni] = useState('');
   const [value, setValue] = useState('');
   const [inputValid, setInputValid] = useState(false);
   const [storeDNI, setStoreDNI] = useState([]);
-  const [searched, setSearched] = useState(false);
+  // const [searched, setSearched] = useState(false);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleSearch = (e) => {
     const input = e.target.value;
-    const regex = /^[0-9]*$/;
+    const regex = /^[0-9]{8}$/;
 
-    if(input.length !== 8 || !regex.test(input)) {
-      console.log('Ingrese un DNI valido');
-      setValue(input);
+    if (!regex.test(input)) {
       setInputValid(false);
     } else {
-      console.log('DNI Aceptado');
-      setValue(input);
       setDni(input);
       setInputValid(true);
     }
+    setValue(input);
+  };
 
-    console.log('Buscando...', {input});
-  }
+  const handleSearchClick = async () => {
+    if (!inputValid) return;
+    setLoading(true);
+    setError('');
 
-  const handleSearchClick = () => {
-    const getDNI = dni;
-    console.log('DNI Aceptado: Buscando...', {getDNI});
+    const url = import.meta.env.VITE_API_URL;
+    const token = import.meta.env.VITE_API_TOKEN;
 
-    const fetchDniData = async (dni) => {
-        const url = "https://apiperu.dev/api/dni";
-        const token = "93a787d6f0deb809e4d9530142cc774092b19a43bf7114c9372b3e6a362300df"; 
-        try {
-            const response = await axios.post(
-                url,
-                { dni: dni }, // Data payload
-                {
-                    headers: {
-                        "Accept": "application/json",
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${token}`
-                    }
-                }
-            );
-            
-            console.log("API Response:", response.data);
-            localStorage.setItem('dni', JSON.stringify(response.data));
-            setStoreDNI(response.data);
-            setSearched(true);
-        } catch (error) {
-            console.error("API Error:", error);
-        }
-    };
+    setLoading(true);
 
-  // Example Usage
-  fetchDniData(getDNI);
-  }
+    try {
+      const response = await axios.post(
+          url,
+          { dni: dni }, // Data payload
+          {
+              headers: {
+                  "Accept": "application/json",
+                  "Content-Type": "application/json",
+                  "Authorization": `Bearer ${token}`
+              }
+          }
+      );
+
+      if (!response.data.success || !response.data.data) {
+        setError("DNI no encontrado. Verifique el número e intente nuevamente.");
+        setValue(''); // Clear input
+        return;
+      }
+
+      const newEntry = response.data.data;
+      
+      const isDuplicate = storeDNI.some(person => person.numero === newEntry.numero);
+      if (isDuplicate) {
+        setError("Este DNI ya ha sido buscado.");
+        setValue(''); // Clear input
+        return;
+      }
+      
+      setStoreDNI((prev) => [...prev, newEntry]); // Append new data
+      setValue(''); // Clear input
+      setInputValid(false);
+    } catch (error) {
+      setError("Error al buscar el DNI. Intente nuevamente.");
+      console.error("API Error:", error);
+      setValue('');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <main className='MainApp'>
       <h1 className='Title'>Buscar Por DNI</h1>
       <p>Ingrese el DNI de la persona que desea buscar</p>
+      
       <form className="Search">
         <input 
-          type="number" 
-          placeholder="Ingrese DNI" 
-          max='8' 
-          min='8' 
+          type="text" 
+          placeholder="Ingrese DNI (8 dígitos)" 
           value={value} 
           onChange={handleSearch} 
-          className={inputValid ? 'bueno' : 'malo'}/>
-        <FaSearch onClick={inputValid ? handleSearchClick : undefined} className={inputValid ? 'allow' : 'disabled'}/>
+          maxLength="8"
+          pattern="[0-9]{8}"
+          className={inputValid ? 'bueno' : 'malo'} 
+        />
+        <FaSearch 
+          onClick={handleSearchClick} 
+          className={inputValid ? 'allow' : 'disabled'} 
+        />
       </form>
-      {searched && <div className="Result">
-        <h1>Resultados Para <span>DNI: {storeDNI.data.numero}</span></h1>
-        <hr />
-        <h2>Nombre Completo: {storeDNI.data.nombre_completo}</h2>
-        <p>Nombre: {storeDNI.data.nombres}</p>
-        <p>Apellido: {storeDNI.data.apellido_paterno} {storeDNI.data.apellido_materno}</p>
-      </div>}
+
+      {loading && 
+        <div className='Loading'>
+          <p className='ubuntu-bold-italic'>Cargando...</p>
+          <img src={buscar} alt="Cargando..." />
+        </div>}
+      {error && 
+        <div className='Error'>
+          <BiSolidError />
+          <p>{error}</p>
+        </div>}
+
+      {storeDNI.length > 0 && (
+        <ul className="Result">
+          {storeDNI.map((person, index) => (
+            <li key={index}>
+              <h1>Resultados Para DNI: <span className='NumeroDNI'>{person.numero}</span></h1>
+              <hr />
+              <h2><span className='InfoDNI'>Nombre Completo:</span> {person.nombre_completo}</h2>
+              <p><span className='InfoDNI'>Nombre:</span> {person.nombres}</p>
+              <p><span className='InfoDNI'>Apellido:</span> {person.apellido_paterno} {person.apellido_materno}</p>
+            </li>
+          ))}
+        </ul>
+      )}
     </main>
-  )
+  );
 }
 
-export default App
+export default App;

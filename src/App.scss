@@ -128,10 +128,29 @@ body {
   text-align: left;
   flex-direction: column;
   padding: 20px;
+  overflow: auto;
 
-  span {
+  li {
+    list-style-type: none;
+    padding: 20px;
+    border: 1px solid yellowgreen;
+    border-radius: 10px;
+    margin: 20px;
+    background-color: gray;
+  }
+
+  .NumeroDNI {
     font-size: 1.5rem;
     font-family: "Leckerli One", serif;
+    color: #FCC75F;
+  }
+  .InfoDNI {
+    font-size: 1.2rem;
+    font-family: "Ubuntu", serif;
+    color: white;
+    font-size: 1.4rem;
+    padding: 15px;
+    color: lightyellow;
   }
   hr {
     border: 1px solid yellowgreen;
@@ -139,8 +158,45 @@ body {
   }
   h1 {
     font-size: 1.4rem;
+    color: lightgray;
   }
   h2 {
     font-size: 1.2rem;
+  }
+}
+.Loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  p {
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    color: #FCC75F;
+    padding: 15px;
+  }
+  img {
+    width: 100px;
+    height: 100px;
+  }
+}
+.Error {
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  color: #FCC75F;
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+
+  svg {
+    // transform: scale(2.5);
+    width: 60px;
+    height: 60px;
+  }
+  p {
+    padding: 15px;
   }
 }
