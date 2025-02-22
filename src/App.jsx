@@ -43,6 +43,7 @@ function App() {
           { dni: dni }, // Data payload
           {
               headers: {
+                  "Access-Control-Allow-Origin": "*",
                   "Accept": "application/json",
                   "Content-Type": "application/json",
                   "Authorization": `Bearer ${token}`
