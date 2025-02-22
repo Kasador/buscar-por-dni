@@ -1,5 +1,5 @@
 # 🗂 Buscar Por DNI
-### [![Netlify Status](https://api.netlify.com/api/v1/badges/b4ca35f8-4c9e-428a-a262-5e7bf554b6f9/deploy-status)](https://app.netlify.com/sites/la-choza-pdv/deploys) [Dev Server](https://la-choza-pdv.netlify.app/)
+### [![Netlify Status](https://api.netlify.com/api/v1/badges/d4b67345-3437-41ab-9f2a-c43489d61f66/deploy-status)](https://app.netlify.com/sites/buscar-por-dni/deploys) [Dev URL](https://buscar-por-dni.netlify.app/)
 ## 🦙 🇵🇪 **Buscar Por DNI - Para Peru**
 
 Este repositorio contiene el código fuente para desarrollar mi aplicación web de **búsqueda por DNI**, diseñada para **consultar personas en Perú**, construida con _**npm create vite@latest**_. La nueva tecnología utilizada está diseñada para **simplicidad, rendimiento y facilidad de gestión de contenido** en futuros desarrollos y mantenimiento.
